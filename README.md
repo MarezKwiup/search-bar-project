@@ -1,12 +1,9 @@
-Smart Search UI A React + TypeScript project that implements a modern,
-interactive search experience with filters, animations, and dynamic
-result rendering. It supports multiple item types (person, file, folder,
-image, video) with tailored UI, highlights, and contextual actions.
+## Smart Search UI A React + TypeScript project that implements a modern,  interactive search experience with filters, animations, and dynamic result rendering. It supports multiple item types (person, file, folder, image, video) with tailored UI, highlights, and contextual actions.
 
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Features 
+## Features 
 
 \* 🔎 Live Search -- Instant results with debounce + mock data
 
@@ -29,7 +26,7 @@ Images, Videos)
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Tech Stack 
+## Tech Stack 
 
 \* React (with TypeScript) -- UI framework
 
@@ -43,7 +40,7 @@ Tech Stack
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Getting Started 
+## Getting Started 
 
 1\. Clone the repo
 
@@ -64,7 +61,7 @@ Visit 👉 http://localhost:5173
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Project Structure
+## Project Structure
 
 src/
 
@@ -87,7 +84,7 @@ src/
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-Customization
+## Customization
 
 Update data.ts with your own dataset
 
