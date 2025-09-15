@@ -21,7 +21,7 @@ function App() {
   const [filterSelected, setFilterSelected] = useState<FilterType>("all");
   return (
     <>
-      <div className="w-full max-w-lg mx-auto mt-10">
+      <div className="w-full max-w-[712px] mx-auto mt-10">
         <motion.div
           layout
           initial={{ borderRadius: 16 }}
@@ -41,7 +41,13 @@ function App() {
                     text: e.target.value,
                   };
                 });
-                setResults(search({ text: e.target.value, type: query.type }));
+                setResults(
+                  search({
+                    text: e.target.value,
+                    type: query.type,
+                    filter: filterSelected,
+                  })
+                );
               }}
             />
             <button
@@ -55,7 +61,9 @@ function App() {
                     text: "",
                   };
                 });
-                setResults(search({ text: "", type: query.type }));
+                setResults(
+                  search({ text: "", type: query.type, filter: filterSelected })
+                );
               }}
             >
               clear
@@ -72,22 +80,31 @@ function App() {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
-                <FilterBar query={query} setQuery={setQuery} results={results} setResults={setResults} filterSelected={filterSelected} setFilterSelected={setFilterSelected}/>
+                <FilterBar
+                  query={query}
+                  setQuery={setQuery}
+                  results={results}
+                  setResults={setResults}
+                  filterSelected={filterSelected}
+                  setFilterSelected={setFilterSelected}
+                />
                 <ul>
-                  {results.map((item, idx) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ delay: idx * 0.05 }}
-                      className="px-4 py-2 hover:bg-gray-50 cursor-pointer"
-                    >
-                      <li key={item.id}>
-                        <ItemCard item={item} />
-                      </li>
-                    </motion.div>
-                  ))}
+                  {results
+                    .filter((item) => item.displayed)
+                    .map((item, idx) => (
+                      <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -10 }}
+                        transition={{ delay: idx * 0.05 }}
+                        className="px-4 py-2 hover:bg-gray-50 cursor-pointer"
+                      >
+                        <li key={item.id}>
+                          <ItemCard item={item} />
+                        </li>
+                      </motion.div>
+                    ))}
                 </ul>
               </motion.div>
             )}

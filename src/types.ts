@@ -6,6 +6,7 @@ export interface BaseItem{
     type:'person'|'file'|'folder'|'video'|'image';
     name:string;
     highlight?:string
+    displayed:boolean
 }
 
 export interface Person extends BaseItem{

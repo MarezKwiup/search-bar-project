@@ -1,17 +1,25 @@
-import { type SearchItem, type SearchQuery } from "./types";
+import { type FilterType, type SearchItem, type ItemType } from "./types";
 import { data } from "./data";
-const search = (query: SearchQuery): SearchItem[] => {
+
+interface SearchProps{
+  text: string;
+  type: Set<ItemType>;
+  filter:FilterType
+}
+
+const search = ({text,type,filter}:SearchProps): SearchItem[] => {
   console.log("Searching for the result!!");
-  const result: SearchItem[] = query.text
+  const result: SearchItem[] =text
     ? data
         .filter((item) =>
-          item.name.toLowerCase().includes(query.text.toLowerCase())
+          item.name.toLowerCase().includes(text.toLowerCase())
           &&
-          query.type.has(item.type)
+          type.has(item.type)
         )
         .map((item) => ({
           ...item,
-          highlight: query.text,
+          highlight:text,
+          displayed:filter==='all'||filter===item.type
         }))
     : [];
   return result;
