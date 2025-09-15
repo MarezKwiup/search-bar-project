@@ -1,5 +1,4 @@
 import { type SearchItem } from "../types";
-import { FaImage } from "react-icons/fa6";
 import { FaPlay } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
@@ -65,25 +64,77 @@ const ItemCard = ({ item }: ItemCardProps) => {
         return <p>Returned something</p>;
     }
   };
-  const renderDetails=()=>{
-    switch(item.type){
+  const renderDetails = () => {
+    switch (item.type) {
+      case "person":
+        return <p className="text-[#AFAFAF] text-[13px]">{item.lastActive}</p>;
+      case "folder":
+        return (
+          <p className="text-[#AFAFAF] text-[13px] flex items-center gap-1.5">
+            in {item.path}
+            <span className="inline-block h-1 w-1 rounded-full bg-[#AFAFAF]"></span>
+            {item.edited}
+          </p>
+        );
+      case "video":
+        return (
+          <p className="text-[#AFAFAF] text-[13px] flex items-center gap-1.5">
+            in {item.path}
+            <span className="inline-block h-1 w-1 rounded-full bg-[#AFAFAF]"></span>
+            {item.added}
+          </p>
+        );
+      case "image":
+        return (
+          <p className="text-[#AFAFAF] text-[13px] flex items-center gap-1.5">
+            in {item.path}
+            <span className="inline-block h-1 w-1 rounded-full bg-[#AFAFAF]"></span>
+            {item.edited}
+          </p>
+        );
+      case "file":
+        return (
+          <p className="text-[#AFAFAF] text-[13px] flex items-center gap-1.5">
+            in {item.path}
+            <span className="inline-block h-1 w-1 rounded-full bg-[#AFAFAF]"></span>
+            {item.edited}
+          </p>
+        );
 
-        case 'person': return(
-            <p className="text-[#AFAFAF] text-[13px]">{item.lastActive}</p>
-        )
-        default: return (
-            <p className="text-[#AFAFAF] text-[13px]">Item details</p>
-        )
+      default:
+        return <p className="text-[#AFAFAF] text-[13px]">Item details</p>;
     }
-  }
-//<p className="text-[#AFAFAF] text-[13px]">Last active?</p>
+  };
+  const renderHightlight = () => {
+    if (!item.highlight) return item.name;
+
+    const regex = new RegExp(`(${item.highlight})`, "gi");
+    const parts = item.name.split(regex);
+
+    return parts.map((part, idx) =>
+      regex.test(part) ? (
+        <span key={idx} className="bg-[#fde3c7]">
+          {part}
+        </span>
+      ) : (
+        <span key={idx}>{part}</span>
+      )
+    );
+  };
   return (
-    <div className="flex items-center p-2 gap-3">
+    <div className="flex items-start p-2 gap-3">
       {itemIcon()}
+
       <div className="flex flex-col items-start">
-        <p className="font-semibold text-[15px]">{item.name}</p>
+        <p className="font-semibold text-[15px]">{renderHightlight()}</p>
         {renderDetails()}
       </div>
+
+      {item.type === "folder" && (
+        <div className="h-5 w-15 bg-[#f2f2f2] border-none rounded-lg self-start flex items-center justify-center">
+          <span className="text-[#737373] text-sm">{item.fileCount} Files</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -43,3 +43,11 @@ export interface ImageItem extends BaseItem{
     edited:string;
     resolution?:string;
 }
+
+export type ItemType = "person" | "file" | "folder" | "video" | "image";
+export interface SearchQuery {
+  text: string;
+  type: Set<ItemType>;
+}
+
+export type FilterType="all" | "person" | "file" | "folder" | "video" | "image";

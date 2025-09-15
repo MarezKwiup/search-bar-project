@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { type SearchItem } from "./types";
+import {
+  type SearchItem,
+  type ItemType,
+  type SearchQuery,
+  type FilterType,
+} from "./types";
 import search from "./search";
 import { CiSearch } from "react-icons/ci";
 import "./App.css";
 import ItemCard from "./components/ItemCard";
+import FilterBar from "./components/FilterBar";
+
 function App() {
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<SearchQuery>({
+    text: "",
+    type: new Set<ItemType>(["person", "file"]),
+  });
   const [results, setResults] = useState<SearchItem[]>([]);
+  const [filterSelected, setFilterSelected] = useState<FilterType>("all");
   return (
     <>
       <div className="w-full max-w-lg mx-auto mt-10">
@@ -21,18 +32,30 @@ function App() {
             <input
               type="text"
               placeholder="Searching is easier"
-              value={query}
+              value={query.text}
               className="w-full px-4 py-2 border-none outline-none"
               onChange={(e) => {
-                setQuery(e.target.value);
-                setResults(search(e.target.value));
+                setQuery((prev) => {
+                  return {
+                    ...prev,
+                    text: e.target.value,
+                  };
+                });
+                setResults(search({ text: e.target.value, type: query.type }));
               }}
             />
             <button
-              className={`text-sm underline ${query === "" ? "hidden" : ""} `}
+              className={`text-sm underline ${
+                query.text === "" ? "hidden" : ""
+              } `}
               onClick={(e) => {
-                setQuery("");
-                setResults(search(""));
+                setQuery((prev) => {
+                  return {
+                    ...prev,
+                    text: "",
+                  };
+                });
+                setResults(search({ text: "", type: query.type }));
               }}
             >
               clear
@@ -49,6 +72,7 @@ function App() {
                 transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
+                <FilterBar query={query} setQuery={setQuery} results={results} setResults={setResults} filterSelected={filterSelected} setFilterSelected={setFilterSelected}/>
                 <ul>
                   {results.map((item, idx) => (
                     <motion.div
@@ -60,7 +84,7 @@ function App() {
                       className="px-4 py-2 hover:bg-gray-50 cursor-pointer"
                     >
                       <li key={item.id}>
-                        <ItemCard item={item}/>
+                        <ItemCard item={item} />
                       </li>
                     </motion.div>
                   ))}
