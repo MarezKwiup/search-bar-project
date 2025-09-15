@@ -10,7 +10,7 @@ import {
 import search from "../search";
 
 type SettingsModalProps = {
-  anchorRef: React.RefObject<HTMLDivElement | null>; // reference to the button
+  anchorRef: React.RefObject<HTMLDivElement | null>;
   settingsModal: boolean;
   setSettingsModal: React.Dispatch<React.SetStateAction<boolean>>;
   query: SearchQuery;

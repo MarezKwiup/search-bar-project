@@ -19,7 +19,7 @@ function App() {
   });
   const [results, setResults] = useState<SearchItem[]>([]);
   const [filterSelected, setFilterSelected] = useState<FilterType>("all");
-  const [isLoading, setIsLoading] = useState(false); // Add this line
+  const [isLoading, setIsLoading] = useState(false);
 
   const performSearch = (searchText: string) => {
     setIsLoading(true);
@@ -84,7 +84,7 @@ function App() {
           <AnimatePresence>
             {results.length > 0 && (
               <motion.div
-                key={`dropdown-${results.length}-${filterSelected}`} // Dynamic key
+                key={`dropdown-${results.length}-${filterSelected}`} 
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}

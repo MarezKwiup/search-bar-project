@@ -8,7 +8,6 @@ interface SearchProps{
 }
 
 const search = ({text,type,filter}:SearchProps): SearchItem[] => {
-  console.log("Searching for the result!!");
   const result: SearchItem[] =text
     ? data
         .filter((item) =>
