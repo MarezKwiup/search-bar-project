@@ -1,7 +1,6 @@
 import { type SearchItem } from "./types";
 
 export const data: SearchItem[] = [
-
   {
     id: "p1",
     type: "person",
@@ -9,6 +8,7 @@ export const data: SearchItem[] = [
     photoUrl: "/assets/randall.jpg",
     status: "active",
     lastActive: "now",
+    displayed: false,
   },
   {
     id: "p2",
@@ -17,6 +17,7 @@ export const data: SearchItem[] = [
     photoUrl: "/assets/kristinge.jpg",
     status: "inactive",
     lastActive: "2d ago",
+    displayed: false,
   },
   {
     id: "p3",
@@ -25,6 +26,7 @@ export const data: SearchItem[] = [
     photoUrl: "/assets/caroline.jpg",
     status: "unactivated",
     lastActive: "3d ago",
+    displayed: false,
   },
   {
     id: "p4",
@@ -33,6 +35,7 @@ export const data: SearchItem[] = [
     photoUrl: "/assets/adam.jpg",
     status: "active",
     lastActive: "1w ago",
+    displayed: false,
   },
   {
     id: "p5",
@@ -41,6 +44,7 @@ export const data: SearchItem[] = [
     photoUrl: "/assets/margaret.jpg",
     status: "inactive",
     lastActive: "2w ago",
+    displayed: false,
   },
 
   {
@@ -50,6 +54,7 @@ export const data: SearchItem[] = [
     fileCount: 12,
     path: "Photos",
     edited: "12m ago",
+    displayed: false,
   },
   {
     id: "f2",
@@ -58,6 +63,7 @@ export const data: SearchItem[] = [
     fileCount: 8,
     path: "Projects",
     edited: "2m ago",
+    displayed: false,
   },
   {
     id: "f3",
@@ -66,6 +72,7 @@ export const data: SearchItem[] = [
     fileCount: 24,
     path: "Documents",
     edited: "5h ago",
+    displayed: false,
   },
   {
     id: "file2",
@@ -74,6 +81,7 @@ export const data: SearchItem[] = [
     fileType: "presentation",
     path: "Presentations",
     edited: "1w ago",
+    displayed: false,
   },
   {
     id: "file3",
@@ -82,6 +90,7 @@ export const data: SearchItem[] = [
     fileType: "doc",
     path: "Work/Notes",
     edited: "3d ago",
+    displayed: false,
   },
   {
     id: "file4",
@@ -90,6 +99,7 @@ export const data: SearchItem[] = [
     fileType: "spreadsheet",
     path: "Finance",
     edited: "1m ago",
+    displayed: false,
   },
   {
     id: "file5",
@@ -98,6 +108,7 @@ export const data: SearchItem[] = [
     fileType: "pdf",
     path: "Meetings",
     edited: "2w ago",
+    displayed: false,
   },
 
   {
@@ -106,6 +117,7 @@ export const data: SearchItem[] = [
     name: "files_karand_video.avi",
     path: "Videos",
     added: "12m ago",
+    displayed: false,
   },
   {
     id: "v2",
@@ -113,6 +125,7 @@ export const data: SearchItem[] = [
     name: "dribble_animation.avi",
     path: "Videos",
     added: "1y ago",
+    displayed: false,
   },
   {
     id: "v3",
@@ -120,6 +133,7 @@ export const data: SearchItem[] = [
     name: "rand_team_call.mp4",
     path: "Calls",
     added: "3d ago",
+    displayed: false,
   },
 
   {
@@ -130,6 +144,7 @@ export const data: SearchItem[] = [
     path: "Photos/Nature",
     edited: "5h ago",
     resolution: "1920x1080",
+    displayed: false,
   },
   {
     id: "img2",
@@ -139,6 +154,7 @@ export const data: SearchItem[] = [
     path: "Work/Events",
     edited: "2d ago",
     resolution: "1200x800",
+    displayed: false,
   },
   {
     id: "img3",
@@ -147,6 +163,7 @@ export const data: SearchItem[] = [
     imageUrl: "/assets/logo.jpg",
     path: "Design/Logos",
     edited: "1w ago",
+    displayed: false,
   },
   {
     id: "img4",
@@ -156,5 +173,6 @@ export const data: SearchItem[] = [
     path: "Projects/Flows",
     edited: "4h ago",
     resolution: "1024x768",
+    displayed: false,
   },
 ];
