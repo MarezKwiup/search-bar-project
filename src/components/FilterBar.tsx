@@ -1,14 +1,13 @@
 import {
   type SearchQuery,
   type FilterType,
-  type ItemType,
   type SearchItem,
 } from "../types";
 import { IoPersonOutline } from "react-icons/io5";
 import { FaPaperclip } from "react-icons/fa6";
 import search from "../search";
 import { IoSettingsOutline } from "react-icons/io5";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";

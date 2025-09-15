@@ -1,5 +1,5 @@
 // SettingsModal.tsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
   type ItemType,
@@ -25,12 +25,10 @@ import { FaPaperclip } from "react-icons/fa6";
 import { FaPlay } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
 import { FaImage } from "react-icons/fa";
-import { text } from "framer-motion/client";
 
 const SettingsModal = ({
   anchorRef,
   settingsModal,
-  setSettingsModal,
   query,
   setQuery,
   filterSelected,

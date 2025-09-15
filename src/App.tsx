@@ -67,7 +67,7 @@ function App() {
               className={`text-sm underline ${
                 query.text === "" ? "hidden" : ""
               } `}
-              onClick={(e) => {
+              onClick={() => {
                 setQuery((prev) => {
                   return {
                     ...prev,
