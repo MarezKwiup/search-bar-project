@@ -2,12 +2,16 @@ import { type SearchItem } from "../types";
 import { FaPlay } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa";
 import { FaFile } from "react-icons/fa";
+import { FaLink } from "react-icons/fa";
+import { ImNewTab } from "react-icons/im";
+import { useState } from "react";
 
 interface ItemCardProps {
   item: SearchItem;
 }
 const ItemCard = ({ item }: ItemCardProps) => {
   console.log("Item is : ", item);
+  const [copied, setCopied] = useState(false);
 
   const itemIcon = () => {
     switch (item.type) {
@@ -62,6 +66,17 @@ const ItemCard = ({ item }: ItemCardProps) => {
 
       default:
         return <p>Returned something</p>;
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(item.name);
+      setCopied(true);
+
+      setTimeout(() => setCopied(false), 1000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
     }
   };
   const renderDetails = () => {
@@ -122,7 +137,7 @@ const ItemCard = ({ item }: ItemCardProps) => {
     );
   };
   return (
-    <div className="flex items-start p-2 gap-3">
+    <div className="flex items-start p-2 gap-3 hover:bg-[#f7f7f7] group">
       {itemIcon()}
 
       <div className="flex flex-col items-start">
@@ -135,6 +150,24 @@ const ItemCard = ({ item }: ItemCardProps) => {
           <span className="text-[#737373] text-sm">{item.fileCount} Files</span>
         </div>
       )}
+      <div className="relative bottom-2 right-2 hidden group-hover:flex items-center text-sm px-2 py-1 rounded ml-auto">
+        <button
+          className="text-[#a6a6a6] hover:text-[#6a6a6a]"
+          onClick={handleCopy}
+        >
+          <FaLink size={18} />
+          {copied && (
+            <span className="absolute -top-6 left-1 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded">
+              Link copied
+            </span>
+          )}
+        </button>
+
+        <button className="ml-3 flex items-center text-[#a6a6a6] hover:text-[#6a6a6a]">
+          <ImNewTab size={18} />
+          <span className="ml-1">New Tab</span>
+        </button>
+      </div>
     </div>
   );
 };

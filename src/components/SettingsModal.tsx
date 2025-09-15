@@ -1,7 +1,12 @@
 // SettingsModal.tsx
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { type ItemType, type SearchQuery,type SearchItem,type FilterType } from "../types";
+import {
+  type ItemType,
+  type SearchQuery,
+  type SearchItem,
+  type FilterType,
+} from "../types";
 import search from "../search";
 
 type SettingsModalProps = {
@@ -12,6 +17,7 @@ type SettingsModalProps = {
   setQuery: React.Dispatch<React.SetStateAction<SearchQuery>>;
   setResults: React.Dispatch<React.SetStateAction<SearchItem[]>>;
   filterSelected: FilterType;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 import { IoPersonOutline } from "react-icons/io5";
@@ -28,7 +34,8 @@ const SettingsModal = ({
   query,
   setQuery,
   filterSelected,
-  setResults
+  setResults,
+  setIsLoading,
 }: SettingsModalProps) => {
   const [filters, setFilters] = useState({
     file: query.type.has("file"),
@@ -54,12 +61,17 @@ const SettingsModal = ({
           type: newSet,
         };
       });
-
-      setResults(search({
-        text:query.text,
-        type:newSet,
-        filter:filterSelected
-      }))
+      setIsLoading(true);
+      setTimeout(() => {
+        setResults(
+          search({
+            text: query.text,
+            type: newSet,
+            filter: filterSelected,
+          })
+        );
+        setIsLoading(false);
+      }, 1000);
       console.log("New active filters set:", newSet);
 
       return updated;

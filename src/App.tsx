@@ -19,6 +19,21 @@ function App() {
   });
   const [results, setResults] = useState<SearchItem[]>([]);
   const [filterSelected, setFilterSelected] = useState<FilterType>("all");
+  const [isLoading, setIsLoading] = useState(false); // Add this line
+
+  const performSearch = (searchText: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setResults(
+        search({
+          text: searchText,
+          type: query.type,
+          filter: filterSelected,
+        })
+      );
+      setIsLoading(false);
+    }, 2000);
+  };
   return (
     <>
       <div className="w-full max-w-[712px] mx-auto mt-10">
@@ -28,7 +43,11 @@ function App() {
           className="bg-white border-none rounded-xl shadow-lg overflow-hidden"
         >
           <div className="flex justify-center items-center w-full px-4 py-2 border-none outline-none">
-            <CiSearch size={25} color="#9e9e9e" />
+            {isLoading ? (
+              <div className="w-[25px] h-[25px] border-2 border-[#f3f3f3] border-t-[#9e9e9e] rounded-full animate-spin"></div>
+            ) : (
+              <CiSearch size={25} color="#9e9e9e" />
+            )}
             <input
               type="text"
               placeholder="Searching is easier"
@@ -41,13 +60,7 @@ function App() {
                     text: e.target.value,
                   };
                 });
-                setResults(
-                  search({
-                    text: e.target.value,
-                    type: query.type,
-                    filter: filterSelected,
-                  })
-                );
+                performSearch(e.target.value);
               }}
             />
             <button
@@ -61,9 +74,7 @@ function App() {
                     text: "",
                   };
                 });
-                setResults(
-                  search({ text: "", type: query.type, filter: filterSelected })
-                );
+                performSearch("");
               }}
             >
               clear
@@ -73,7 +84,7 @@ function App() {
           <AnimatePresence>
             {results.length > 0 && (
               <motion.div
-                key="dropdown"
+                key={`dropdown-${results.length}-${filterSelected}`} // Dynamic key
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -87,13 +98,14 @@ function App() {
                   setResults={setResults}
                   filterSelected={filterSelected}
                   setFilterSelected={setFilterSelected}
+                  setIsLoading={setIsLoading}
                 />
                 <ul>
                   {results
                     .filter((item) => item.displayed)
                     .map((item, idx) => (
                       <motion.div
-                        key={item.id}
+                        key={`${item.id}-${filterSelected}`}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -10 }}

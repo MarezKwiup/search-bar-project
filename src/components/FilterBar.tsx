@@ -21,6 +21,7 @@ interface FilterBarProps {
   setResults: React.Dispatch<React.SetStateAction<SearchItem[]>>;
   filterSelected: FilterType;
   setFilterSelected: React.Dispatch<React.SetStateAction<FilterType>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FilterBar = (props: FilterBarProps) => {
@@ -31,6 +32,7 @@ const FilterBar = (props: FilterBarProps) => {
     setQuery,
     query,
     setResults,
+    setIsLoading,
   } = props;
   const settingsRef = useRef<HTMLDivElement>(null);
   const [settingsModal, setSettingsModal] = useState(false);
@@ -42,7 +44,10 @@ const FilterBar = (props: FilterBarProps) => {
     );
   };
   return (
-    <div className="relative flex w-full gap-5 border border-b-[#f3f3f3] border-b-1 border-t-white border-x-white justify-start" ref={settingsRef}>
+    <div
+      className="relative flex w-full gap-5 border border-b-[#f3f3f3] border-b-1 border-t-white border-x-white justify-start"
+      ref={settingsRef}
+    >
       <button
         className={`flex ml-7 gap-1.5 h-full pb-3 ${
           filterSelected === "all" ? "border-b-3 border-b-black" : ""
@@ -199,21 +204,23 @@ const FilterBar = (props: FilterBarProps) => {
       >
         <IoSettingsOutline
           size={20}
-          className="text-[#a1a1a1] hover:text-[#5a5a5a]"
+          className={`text-[#a1a1a1] hover:text-[#5a5a5a] transition-transform duration-300 ${
+            settingsModal ? "rotate-90" : "rotate-0"
+          }`}
         />
-
       </button>
-       {settingsModal && (
-          <SettingsModal
-            anchorRef={settingsRef}
-            settingsModal={settingsModal}
-            setSettingsModal={setSettingsModal}
-            query={query}
-            setQuery={setQuery}
-            setResults={setResults}
-            filterSelected={filterSelected}
-          />
-        )}
+      {settingsModal && (
+        <SettingsModal
+          anchorRef={settingsRef}
+          settingsModal={settingsModal}
+          setSettingsModal={setSettingsModal}
+          query={query}
+          setQuery={setQuery}
+          setResults={setResults}
+          filterSelected={filterSelected}
+          setIsLoading={setIsLoading}
+        />
+      )}
     </div>
   );
 };
