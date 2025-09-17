@@ -44,7 +44,7 @@ Images, Videos)
 
 1\. Clone the repo
 
-git clone https://github.com/yourusername/smart-search-ui.git cd
+git clone https://github.com/MarezKwiup/search-bar-project cd
 smart-search-ui
 
 2\. Install dependencies
